@@ -1,6 +1,8 @@
 ﻿@page
 @model RazorPagesGeneral.Pages.Employees.EmployeesModel
 @{
+    ViewData["Title"] = "Employees";
+    ViewData["ShowButtons"] = true;
 }
 @if (TempData["SuccessMessage"] != null)
 {
@@ -8,12 +10,16 @@
         <p class="p-3 mt-2 text-center">@TempData["SuccessMessage"]</p>
     </div>
 }
+
+@* @await Component.InvokeAsync("HeadCount") *@
+<vc:head-count department="@null"></vc:head-count>
+
 <h1>Employees</h1>
 <div class="row">
     @foreach (var item in Model.Employees)
     {
         <div class="col-12 col-sm-6 col-lg-4">
-            <partial name="_DisplayEmployeePartial" model="item"/>
+            <partial name="_DisplayEmployeePartial" model="item" view-data="ViewData"/>
         </div>
     }
 </div>

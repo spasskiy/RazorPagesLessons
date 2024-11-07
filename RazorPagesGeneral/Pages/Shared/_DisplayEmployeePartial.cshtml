@@ -1,7 +1,7 @@
 ﻿@model Employee
 @{
     var photoPath = $"/images/{Model.PhotoPath ?? "noimage.png"}";
-    var showButtons = ViewData["ShowButtons"];
+    var showButtons = (bool)ViewData["ShowButtons"];
 }
 
 <div class="card-deck">
@@ -13,10 +13,13 @@
             <img class="card-img-top imageThumbnail" src="@photoPath" alt="@Model.Name" asp-append-version="true" />
         </div>
 
-        <div class="card-footer text-center">
-            <a asp-page="/Employees/Details" asp-route-ID="@Model.Id" class="btn btn-success m-1 buttonShadow">View</a>
-            <a asp-page="/Employees/Edit" asp-route-ID="@Model.Id" class="btn btn-primary m-1 buttonShadow">Edit</a>
-            <a asp-page="/Employees/Delete" asp-route-ID="@Model.Id" class="btn btn-danger m-1 buttonShadow">Delete</a>
-        </div>
+        @if (showButtons)
+        {
+            <div class="card-footer text-center">
+                <a asp-page="/Employees/Details" asp-route-ID="@Model.Id" class="btn btn-success m-1 buttonShadow">View</a>
+                <a asp-page="/Employees/Edit" asp-route-ID="@Model.Id" class="btn btn-primary m-1 buttonShadow">Edit</a>
+                <a asp-page="/Employees/Delete" asp-route-ID="@Model.Id" class="btn btn-danger m-1 buttonShadow">Delete</a>
+            </div>
+        }
     </div>
 </div>
