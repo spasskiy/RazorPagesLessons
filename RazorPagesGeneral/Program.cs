@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using RazorPagesLessons.Services;
 
 namespace RazorPagesGeneral
@@ -9,6 +10,10 @@ namespace RazorPagesGeneral
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddDbContextPool<AppDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("EmployeeDBConnection"));
+            });
             builder.Services.AddRazorPages();
             builder.Services.AddSingleton<IEmployeeRepozitory, MockEmployeeRepozitory>();
             builder.Services.Configure<RouteOptions>(options => 

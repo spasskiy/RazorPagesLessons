@@ -9,6 +9,7 @@ namespace RazorPagesLessons.Services
 {
     public  interface IEmployeeRepozitory
     {
+        IEnumerable<Employee> Search(string searchTerm);
         IEnumerable<Employee> GetAllEmployees();
         Employee? GetEmployee(int id);
         Employee Update(Employee updatedEmployee);

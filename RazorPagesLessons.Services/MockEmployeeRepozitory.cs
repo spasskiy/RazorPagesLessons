@@ -100,6 +100,14 @@ namespace RazorPagesLessons.Services
             return _employeeList.FirstOrDefault(e => e.Id == id);
         }
 
+        public IEnumerable<Employee> Search(string searchTerm)
+        {
+            if(string.IsNullOrWhiteSpace(searchTerm))
+                return _employeeList;
+            searchTerm = searchTerm.ToLower();
+            return _employeeList.Where(e => e.Name.ToLower().Contains(searchTerm) || e.Email.ToLower().Contains(searchTerm) || e.Department.ToString().ToLower().Contains(searchTerm));
+        }
+
         public Employee Update(Employee updatedEmployee)
         {
             Employee employee = _employeeList.FirstOrDefault(x => x.Id == updatedEmployee.Id);
