@@ -1,0 +1,19 @@
+﻿@page
+@model RazorPagesGeneral.Pages.Employees.EmployeesModel
+@{
+}
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        <p class="p-3 mt-2 text-center">@TempData["SuccessMessage"]</p>
+    </div>
+}
+<h1>Employees</h1>
+<div class="row">
+    @foreach (var item in Model.Employees)
+    {
+        <div class="col-12 col-sm-6 col-lg-4">
+            <partial name="_DisplayEmployeePartial" model="item"/>
+        </div>
+    }
+</div>
